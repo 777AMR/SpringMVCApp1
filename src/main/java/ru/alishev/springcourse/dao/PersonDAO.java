@@ -31,7 +31,7 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO Person VALUES(1, ?, ?, ?)", person.getName(), person.getAge(),
+        jdbcTemplate.update("INSERT INTO Person(name, age, email) VALUES(?, ?, ?)", person.getName(), person.getAge(),
                 person.getEmail());
     }
 
@@ -54,8 +54,8 @@ public class PersonDAO {
         long before = System.currentTimeMillis();
 
         for (Person person : people) {
-            jdbcTemplate.update("INSERT INTO Person VALUES(1, ?, ?, ?)", person.getName(), person.getAge(),
-                    person.getEmail());
+            jdbcTemplate.update("INSERT INTO Person VALUES(?, ?, ?, ?)",
+                    person.getId(), person.getName(), person.getAge(), person.getEmail());
         }
 
         long after = System.currentTimeMillis();
